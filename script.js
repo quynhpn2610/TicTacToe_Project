@@ -9,7 +9,6 @@ let currentPlayer = O_text;
 
 // Handle cell click
 const cellClicked = (e) => {
-    console.log("TON TIN TUN")
     const id = e.target.id;
     // Check if the space is available, then add x or o
     if(!spaces[id]){
