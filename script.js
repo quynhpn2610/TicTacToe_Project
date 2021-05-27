@@ -46,6 +46,9 @@ const playerHasWon = () => {
         } else if (spaces[4] === currentPlayer && spaces[8] === currentPlayer) {
             return true;
         }
+        else if (spaces[2] === currentPlayer && spaces[4] === currentPlayer && spaces[6]===currentPlayer){
+            return true;
+        }
 
     }
     // check from position 8
@@ -66,6 +69,7 @@ const playerHasWon = () => {
             return true;
         }
     }
+    // check from position 2
 }
 
 
