@@ -69,6 +69,7 @@ const playerHasWon = () => {
             return true;
         }
     }
+    return false;
 }
 
 
