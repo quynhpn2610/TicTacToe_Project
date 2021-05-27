@@ -6,7 +6,23 @@ const spaces = [];
 const O_text = "0";
 const X_text = "X";
 let currentPlayer = O_text;
+let moveCount = 0;
 //let gameIsLive = true;
+
+function getUserConfirmation() {
+    let choice = confirm("Play again?")
+    if (choice) {
+        restart();
+    }
+    else {
+        window.close();
+    }
+}
+
+function gameIsOver() {
+    return (playerHasWon() || moveCount == 9);
+}
+
 
 // Handle cell click
 const cellClicked = (e) => {
@@ -17,15 +33,20 @@ const cellClicked = (e) => {
         spaces[id] = currentPlayer;
         e.target.innerText = currentPlayer;
         // Check if someone has won (aka game is finished). If so, stop the game.
-        if (playerHasWon()) {
-            playText.innerText = `${currentPlayer} wins!!`
-            return
+        if (gameIsOver()) {
+            if (playerHasWon()) {
+                playText.innerText = `${currentPlayer} wins!!`
+            }
+            else {
+                playText.innerText ="Tie";
+            }
         }
         // Check if game is tied and stop the game.
         // else if (gameIsTied){
         //     playText.innerText = "Game is tied!!"
         // return
         // }
+
         // Else, continue to switch turn between x and o
         else {
             currentPlayer = currentPlayer === O_text ? X_text : O_text;
@@ -80,6 +101,7 @@ const playerHasWon = () => {
 // Event listener for each cell
 for (const cell of cells) {
     cell.addEventListener("click", cellClicked);
+    moveCount++;
 }
 
 const restart = () => {
@@ -96,6 +118,6 @@ const restart = () => {
 
 restartBtn.addEventListener("click", restart);
 
-restart();
+// restart();
 
 
