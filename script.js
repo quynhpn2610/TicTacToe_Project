@@ -9,44 +9,25 @@ let currentPlayer = O_text;
 let moveCount = 0;
 //let gameIsLive = true;
 
-function getUserConfirmation() {
-    let choice = confirm("Play again?")
-    if (choice) {
-        restart();
-    }
-    else {
-        window.close();
-    }
-}
-
-function gameIsOver() {
-    return (playerHasWon() || moveCount == 9);
-}
-
-
 // Handle cell click
 const cellClicked = (e) => {
-    console.log("Ton")
+    moveCount += 1;
+    console.log(moveCount);
     const id = e.target.id;
     // Check if the space is available, then add x or o
     if (!spaces[id]) {
         spaces[id] = currentPlayer;
         e.target.innerText = currentPlayer;
         // Check if someone has won (aka game is finished). If so, stop the game.
-        if (gameIsOver()) {
-            if (playerHasWon()) {
-                playText.innerText = `${currentPlayer} wins!!`
-            }
-            else {
-                playText.innerText ="Tie";
-            }
+        if (playerHasWon()) {
+            playText.innerText = `${currentPlayer} wins!!`
+            return;
         }
         // Check if game is tied and stop the game.
-        // else if (gameIsTied){
-        //     playText.innerText = "Game is tied!!"
-        // return
-        // }
-
+        else if (gameIsTied()) {
+            playText.innerText = "Game is tied!!"
+            return
+        }
         // Else, continue to switch turn between x and o
         else {
             currentPlayer = currentPlayer === O_text ? X_text : O_text;
@@ -88,20 +69,21 @@ const playerHasWon = () => {
 }
 
 
-
 // Check if game is tied
-// const gameIsTied = () => {
-// if (spaces[0] && spaces[1] && spaces[2] && spaces[3] && spaces[4] && spaces[5] && spaces[6] && spaces[7] && spaces[8] && !playerHasWon()){
-//     return true;
-//     }
-// }
-    //gameIsLive = false;
+const gameIsTied = () => {
+    let allCellsAreOccupied = moveCount === 9;
+    let neitherPlayWin = !playerHasWon();
+    if (allCellsAreOccupied && neitherPlayWin) {
+        return true;
+    }
+    return false;
+}
+//gameIsLive = false;
 
 
 // Event listener for each cell
 for (const cell of cells) {
     cell.addEventListener("click", cellClicked);
-    moveCount++;
 }
 
 const restart = () => {
@@ -118,6 +100,6 @@ const restart = () => {
 
 restartBtn.addEventListener("click", restart);
 
-// restart();
+restart();
 
 
