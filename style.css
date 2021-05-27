@@ -45,9 +45,10 @@ body{
     background: aliceblue;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-row: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-gap: 15px;
     margin-top: 50px;
+
 
 }
 
