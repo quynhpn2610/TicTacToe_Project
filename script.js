@@ -7,7 +7,7 @@ const O_text = "0";
 const X_text = "X";
 let currentPlayer = O_text;
 let moveCount = 0;
-//let gameIsLive = true;
+
 
 // Handle cell click
 const cellClicked = (e) => {
@@ -69,7 +69,6 @@ const playerHasWon = () => {
             return true;
         }
     }
-    // check from position 2
 }
 
 
@@ -82,8 +81,6 @@ const gameIsTied = () => {
     }
     return false;
 }
-//gameIsLive = false;
-
 
 // Event listener for each cell
 for (const cell of cells) {
@@ -99,11 +96,10 @@ const restart = () => {
     })
     playText.innerText = `Let's Play!`;
     currentPlayer = O_text;
-    //gameIsLive = true;
 }
 
 restartBtn.addEventListener("click", restart);
 
-restart();
+
 
 
