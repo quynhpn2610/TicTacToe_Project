@@ -23,11 +23,6 @@ const cellClicked = (e) => {
             playText.innerText = `${currentPlayer} wins!!`
             return;
         }
-        // Check if game is tied and stop the game.
-        else if (gameIsTied()) {
-            playText.innerText = "Game is tied!!"
-            return
-        }
         // Else, continue to switch turn between x and o
         else {
             currentPlayer = currentPlayer === O_text ? X_text : O_text;
@@ -49,8 +44,8 @@ const playerHasWon = () => {
         else if (spaces[2] === currentPlayer && spaces[4] === currentPlayer && spaces[6]===currentPlayer){
             return true;
         }
-
     }
+
     // check from position 8
     else if (spaces[8] === currentPlayer) {
         if (spaces[5] === currentPlayer && spaces[2] === currentPlayer) {
@@ -59,6 +54,7 @@ const playerHasWon = () => {
             return true;
         }
     }
+
     // check from position 4
     else if (spaces[4] === currentPlayer) {
         if (spaces[1] === currentPlayer && spaces[7] === currentPlayer) {
@@ -74,14 +70,14 @@ const playerHasWon = () => {
 
 
 // Check if game is tied
-const gameIsTied = () => {
-    let allCellsAreOccupied = moveCount === 9;
-    let neitherPlayWin = !playerHasWon();
-    if (allCellsAreOccupied && neitherPlayWin) {
-        return true;
-    }
-    return false;
-}
+// const gameIsTied = () => {
+//     let allCellsAreOccupied = moveCount === 9;
+//     let neitherPlayWin = !playerHasWon();
+//     if (allCellsAreOccupied && neitherPlayWin) {
+//         return true;
+//     }
+//     return false;
+// }
 
 // Event listener for each cell
 for (const cell of cells) {
